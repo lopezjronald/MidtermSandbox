@@ -14,17 +14,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
-	
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 
 	private User user;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("MoreBetterPU");
-		
+
 	}
 
 	@AfterAll
@@ -47,12 +46,12 @@ class UserTest {
 	@Test
 	@DisplayName("testing that user mapping work")
 	void test1() {
-		
+
 		assertNotNull(user);
 		assertTrue(user.getEnabled());
 		assertEquals("admin", user.getUsername());
 		assertEquals("admin", user.getPassword());
-		
+
 	}
 
 }
