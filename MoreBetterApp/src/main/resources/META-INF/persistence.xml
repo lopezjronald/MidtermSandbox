@@ -9,6 +9,7 @@
     </provider>
     
     <class>com.skilldistillery.morebetterapp.entities.User</class>
+    <class>com.skilldistillery.morebetterapp.entities.Article</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/morebetterdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
