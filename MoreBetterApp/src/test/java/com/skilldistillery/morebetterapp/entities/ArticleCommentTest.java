@@ -1,6 +1,7 @@
 package com.skilldistillery.morebetterapp.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,12 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class ArticleCommentTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
-
+	private ArticleComment articleComment;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("MoreBetterPU");
@@ -33,31 +34,23 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		articleComment = em.find(ArticleComment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		articleComment = null;
 	}
 
 	@Test
-	@DisplayName("testing that user mapping work")
+	@DisplayName("Testing That ArticleComment class mapping is work")
 	void test1() {
-
-		assertNotNull(user);
-		assertEquals("Joe", user.getFirstName());
-		assertEquals("Mama", user.getLastName());
-		assertEquals("joe.mama@user.mail", user.getEmail());
-		assertEquals("STANDARD", user.getRole());
-		assertEquals(35, user.getAge());
-		assertEquals("joemama", user.getUsername());
-		assertEquals("joemama", user.getPassword());
-		assertEquals(1, user.getEnabled());
-		assertEquals(null, user.getPicture());
-		assertEquals(null, user.getBiography());
-		
+		assertNotNull(articleComment);
+		assertEquals("Great article", articleComment.getContent());
+		assertEquals(2020, articleComment.getCreatedAt().getYear());
+		assertEquals(5, articleComment.getCreatedAt().getMonthValue());
+		assertEquals(22, articleComment.getCreatedAt().getDayOfMonth());
 	}
 
 }
