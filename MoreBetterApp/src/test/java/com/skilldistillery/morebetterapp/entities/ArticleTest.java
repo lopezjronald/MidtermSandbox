@@ -48,9 +48,11 @@ class ArticleTest {
 	@DisplayName("testing that address mapping work")
 	void test1() {
 		assertNotNull(article);
-		assertEquals("Do you have a long-term plan", article.getTitle());
+		assertEquals("Do you have a long-term plan ", article.getTitle());
 		assertEquals("Despite the recent recovery in the market, stocks remain down by more than 12% from the February peak, and about 9% year-to-date. Meanwhile, the story for the first three weeks of May has been one of running in place.", article.getContents());
-		assertEquals("2020-04-10 10:25:30", article.getCreated());
+		assertEquals(2020, article.getCreated().getYear());
+		assertEquals(4, article.getCreated().getMonthValue());
+		assertEquals(10, article.getCreated().getDayOfMonth());
 
 	}
 

@@ -1,10 +1,11 @@
 package com.skilldistillery.morebetterapp.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
 @Entity
 public class Article {
@@ -13,15 +14,9 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@JoinColumn(name = "category_id")
-	private int categoryId;
-
-	@JoinColumn(name = "mentor_id")
-	private int mentorId;
-
 	private String title;
 	private String contents;
-	private String created;
+	private LocalDateTime created;
 
 	// methods
 	public Article() {
@@ -52,18 +47,14 @@ public class Article {
 		this.contents = contents;
 	}
 
-	public String getCreated() {
+	public LocalDateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(String created) {
+	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
 
-	@Override
-	public String toString() {
-		return "Article [id=" + id + ", categoryId=" + categoryId + ", mentorId=" + mentorId + ", title=" + title
-				+ ", contents=" + contents + ", created=" + created + "]";
-	}
+
 
 }
