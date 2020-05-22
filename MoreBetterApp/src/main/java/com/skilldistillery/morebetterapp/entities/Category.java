@@ -1,9 +1,13 @@
 package com.skilldistillery.morebetterapp.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -19,6 +23,8 @@ public class Category {
 	
 	private String description;
 
+	@OneToMany(mappedBy="category")
+	private List<Event> events;
 
 	//methods
 	
@@ -42,6 +48,33 @@ public class Category {
 		return logo;
 	}
 
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public void addEvent(Event event) {
+		if (events == null) {
+			events = new ArrayList<>();
+		}
+		if (!events.contains(event)) {
+			events.add(event);
+			if (event.getCategory() != null) {
+				event.getCategory().getEvents().remove(event);
+			}
+			event.setCategory(this);
+		}
+	}
+	public void removeEvent(Event event) {
+		event.setCategory(null);
+		if (events != null) {
+			events.remove(event);
+		}
+	}
+	
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}

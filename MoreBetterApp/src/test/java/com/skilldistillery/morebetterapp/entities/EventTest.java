@@ -50,5 +50,13 @@ class EventTest {
 		assertEquals("Why financial literacy matters", event.getTitle());
 		assertEquals("Financial literacy cannot predict or remedy a crisis, but financial education will play a pivotal role in the economic recovery of our country.", event.getDescription());
 	}
+	
+	// SELECT category.name FROM category JOIN event ON category.id = event.category_id WHERE event.id = 1;
+	@Test
+	@DisplayName("testing that event to category works")
+	void test2() {
+		assertNotNull(event);
+		assertEquals("Finance", event.getCategory().getName());
+	}
 
 }
