@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `category_id` INT NOT NULL,
   `mentor_id` INT NOT NULL,
   `address_id` INT NOT NULL,
-  `titile` VARCHAR(100) NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
   `description` TEXT NOT NULL,
   `location` VARCHAR(1000) NULL,
   `event_date` DATETIME NULL,
@@ -255,7 +255,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `morebetterdb`;
-INSERT INTO `event` (`id`, `category_id`, `mentor_id`, `address_id`, `titile`, `description`, `location`, `event_date`, `max_capacity`, `price`, `created_at`, `last_updated`) VALUES (1, 1, 1, 1, 'Why financial literacy matters', 'Financial literacy cannot predict or remedy a crisis, but financial education will play a pivotal role in the economic recovery of our country.', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `event` (`id`, `category_id`, `mentor_id`, `address_id`, `title`, `description`, `location`, `event_date`, `max_capacity`, `price`, `created_at`, `last_updated`) VALUES (1, 1, 1, 1, 'Why financial literacy matters', 'Financial literacy cannot predict or remedy a crisis, but financial education will play a pivotal role in the economic recovery of our country.', NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
