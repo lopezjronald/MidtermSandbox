@@ -17,7 +17,6 @@ class UserTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-
 	private User user;
 
 	@BeforeAll
@@ -48,9 +47,16 @@ class UserTest {
 	void test1() {
 
 		assertNotNull(user);
-		assertTrue(user.getEnabled());
-		assertEquals("admin", user.getUsername());
-		assertEquals("admin", user.getPassword());
+		assertEquals("", user.getFirstName());
+		assertEquals("", user.getLastName());
+		assertEquals("", user.getEmail());
+		assertEquals("", user.getRole());
+		assertEquals("", user.getAge());
+		assertEquals("", user.getUsername());
+		assertEquals("", user.getPassword());
+		assertEquals("", user.getEnabled());
+		assertEquals("", user.getPicture());
+		assertEquals("", user.getBiography());
 
 	}
 
