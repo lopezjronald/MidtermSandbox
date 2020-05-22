@@ -47,17 +47,17 @@ class UserTest {
 	void test1() {
 
 		assertNotNull(user);
-		assertEquals("", user.getFirstName());
-		assertEquals("", user.getLastName());
-		assertEquals("", user.getEmail());
-		assertEquals("", user.getRole());
-		assertEquals("", user.getAge());
-		assertEquals("", user.getUsername());
-		assertEquals("", user.getPassword());
-		assertEquals("", user.getEnabled());
-		assertEquals("", user.getPicture());
-		assertEquals("", user.getBiography());
-
+		assertEquals("Joe", user.getFirstName());
+		assertEquals("Mama", user.getLastName());
+		assertEquals("joe.mama@user.mail", user.getEmail());
+		assertEquals("STANDARD", user.getRole());
+		assertEquals(35, user.getAge());
+		assertEquals("joemama", user.getUsername());
+		assertEquals("joemama", user.getPassword());
+		assertEquals(1, user.getEnabled());
+		assertEquals(null, user.getPicture());
+		assertEquals(null, user.getBiography());
+		
 	}
 
 }
