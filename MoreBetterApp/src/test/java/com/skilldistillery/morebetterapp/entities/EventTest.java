@@ -47,8 +47,8 @@ class EventTest {
 	void test1() {
 
 		assertNotNull(event);
-//		assertEquals("Why financial literacy matters ", event.getTitle());
-//		assertEquals("Financial literacy cannot predict or remedy a crisis, but financial education will play a pivotal role in the economic recovery of our country.", event.getDescription());
+		assertEquals("Why financial literacy matters", event.getTitle());
+		assertEquals("Financial literacy cannot predict or remedy a crisis, but financial education will play a pivotal role in the economic recovery of our country.", event.getDescription());
 	}
 
 }
