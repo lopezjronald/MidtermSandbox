@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Article {
@@ -18,9 +20,44 @@ public class Article {
 	private String contents;
 	private LocalDateTime created;
 
+	@ManyToOne
+	@JoinColumn(name = "mentor_id")
+	private User user;
+
 	// methods
+
 	public Article() {
 		super();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Article other = (Article) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public int getId() {
@@ -59,7 +96,5 @@ public class Article {
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", contents=" + contents + ", created=" + created + "]";
 	}
-
-
 
 }

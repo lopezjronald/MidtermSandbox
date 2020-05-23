@@ -15,7 +15,7 @@ public class ArticleComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "content")
+	
 	private String content;
 
 	@Column(name = "created_at")
