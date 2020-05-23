@@ -15,7 +15,7 @@ public class EventDAOImpl implements EventDAO {
 	private EntityManager em;
 	
 	@Override
-	public Event findById(int id) {
+	public Event findEventById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
