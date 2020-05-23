@@ -31,13 +31,13 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 	@Override
-	public List<Event> findAllEventsByCategory() {
+	public List<Event> displayAllEventsByCategory() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Article> findAllArticlesByCategory() {
+	public List<Article> displayAllArticlesByCategory() {
 		// TODO Auto-generated method stub
 		return null;
 	}

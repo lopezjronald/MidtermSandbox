@@ -9,6 +9,6 @@ import com.skilldistillery.morebetterapp.entities.Event;
 public interface CategoryDAO {
 	public Category findCategoryById(int id);
 	public Category findCategoryByName(String name);
-	public List<Event> findAllEventsByCategory();
-	public List<Article> findAllArticlesByCategory();
+	public List<Event> displayAllEventsByCategory();
+	public List<Article> displayAllArticlesByCategory();
 }

@@ -23,7 +23,6 @@ public class UserDAOImpl implements UserDAO {
 	public User createUser(User user) {
 		em.persist(user);
 		em.flush();
-		em.close();
 		return user;
 	}
 
@@ -35,7 +34,6 @@ public class UserDAOImpl implements UserDAO {
 		em.remove(user);
 		boolean stillContains = !em.contains(user);
 		em.flush();
-		em.close();
 		return stillContains; // should return TRUE if deleted successfully.
 	}
 
@@ -53,7 +51,6 @@ public class UserDAOImpl implements UserDAO {
 		updatedUser.setPicture(user.getPicture());
 		updatedUser.setBiography(user.getBiography());
 		em.flush();
-		em.close();
 		return updatedUser;
 	}
 
