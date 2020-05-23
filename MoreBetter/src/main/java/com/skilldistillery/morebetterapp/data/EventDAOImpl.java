@@ -16,32 +16,49 @@ public class EventDAOImpl implements EventDAO {
 	
 	@Override
 	public Event findEventById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Event.class, id);
+		
 	}
 
-	@Override
-	public Event findEventByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Event findEventByTitle(String title) {
+//		Event event = null;
+//		String jpql = "SELECT e FROM Event e WHERE e.title = :title";
+//		return null;
+//	}
 
 	@Override
 	public Event createEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(event);
+		em.flush();
+		return event;
 	}
 
 	@Override
-	public boolean deleteEventById(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteEventById(int id) { // only a mentor can delete an event
+		Event eventToDelete = em.find(Event.class, id);
+		em.remove(eventToDelete);
+		boolean stillContains = !em.contains(eventToDelete);
+		em.flush();
+		return stillContains; // returns True if event was deleted successfully
 	}
 
 	@Override
 	public Event updateEvent(int id, Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		Event updatedEvent = em.find(Event.class, id);
+		updatedEvent.setCategory(event.getCategory());
+		updatedEvent.setEventMentor(event.getEventMentor());
+		updatedEvent.setLocation(event.getLocation());
+		updatedEvent.setTitle(event.getTitle());
+		updatedEvent.setDescription(event.getDescription());
+		updatedEvent.setLocation(event.getLocation());
+		updatedEvent.setEventDate(event.getEventDate());
+		updatedEvent.setMaxCapacity(event.getMaxCapacity());
+		updatedEvent.setPrice(event.getPrice());;
+		updatedEvent.setCreated(event.getCreated());
+		updatedEvent.setUpdated(event.getUpdated());
+		em.flush();
+		return updatedEvent;
 	}
 
 }

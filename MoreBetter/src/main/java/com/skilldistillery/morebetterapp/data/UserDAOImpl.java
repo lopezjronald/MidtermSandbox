@@ -16,26 +16,40 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User findUserById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(User.class, id);
 	}
 
 	@Override
 	public User createUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(user);
+		em.flush();
+		return user;
 	}
 
 	@Override
 	public boolean deleteUserById(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		User userToDelete = em.find(User.class, id);
+		em.remove(userToDelete);
+		boolean stillContains = !em.contains(userToDelete);
+		em.flush();
+		return stillContains; // should return TRUE if deleted successfully.
 	}
 
 	@Override
 	public User updateUser(int id, User user) {
-		// TODO Auto-generated method stub
-		return null;
+		User updatedUser = em.find(User.class, id);
+		updatedUser.setFirstName(user.getFirstName());
+		updatedUser.setLastName(user.getLastName());
+		updatedUser.setEmail(user.getEmail());
+		updatedUser.setRole(user.getRole());
+		updatedUser.setAge(user.getAge());
+		updatedUser.setUsername(user.getUsername());
+		updatedUser.setPassword(user.getPassword());
+		updatedUser.setEnabled(user.getEnabled());
+		updatedUser.setPicture(user.getPicture());
+		updatedUser.setBiography(user.getBiography());
+		em.flush();
+		return updatedUser;
 	}
 
 }

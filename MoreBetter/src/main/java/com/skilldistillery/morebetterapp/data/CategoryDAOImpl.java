@@ -20,25 +20,30 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	public Category findCategoryById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Category.class, id);
 	}
 
 	@Override
 	public Category findCategoryByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Category category = null;
+		String jpql = "SELECT c FROM Category c WHERE c.name = :name";
+		category = em.createQuery(jpql, Category.class).setParameter("name", name).getSingleResult();
+		return category;
 	}
 
 	@Override
-	public List<Event> findAllEventsByCategory() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Event> displayAllEventsByCategory(int id) {
+		List<Event> events = null;
+		String jpql = "SELECT e FROM Event e WHERE e.category = :id";
+		events = em.createQuery(jpql, Event.class).setParameter("id", id).getResultList();
+		return events;
 	}
 
 	@Override
-	public List<Article> findAllArticlesByCategory() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Article> displayAllArticlesByCategory(int id) {
+		List<Article> articles = null;
+		String jpql = "SELECT a FROM Article a WHERE a.category = :id";
+		articles = em.createQuery(jpql, Article.class).setParameter("id", id).getResultList();
+		return articles;
 	}
 }
