@@ -57,29 +57,41 @@ class UserTest {
 		assertEquals(1, user.getEnabled());
 		assertEquals(null, user.getPicture());
 		assertEquals(null, user.getBiography());
-		
+
 	}
-	
-	
-	@Test //select article.title from article join user on article.mentor_id = user.id where user.id =1;
+
+	@Test // select article.title from article join user on article.mentor_id = user.id
+			// where user.id =1;
 	@DisplayName("testing that user to article mapping work")
 	void test2() {
 
 		assertNotNull(user);
 		assertNotNull(user.getArticles());
-		assertTrue(user.getArticles().size()>0);
+		assertTrue(user.getArticles().size() > 0);
 		assertEquals("Do you have a long-term plan ", user.getArticles().get(0).getTitle());
 	}
-	
+
 	@Test
 	@DisplayName("testing that user to category mapping work")
 	void test3() {
-		
+
 		assertNotNull(user);
 		assertNotNull(user.getCategories());
-		assertTrue(user.getCategories().size()>0);
-		assertTrue(user.getCategories().size()>0);
+		assertTrue(user.getCategories().size() > 0);
 		assertEquals("Finance", user.getCategories().get(0).getName());
-		
+
+	}
+
+	@Test
+	@DisplayName("testing that user to event thru event_participant mapping work")
+	void test4() {
+		//select event.title from event join event_participant on event_participant.event_id = event.id 
+		//join user on event_participant.user_id = user.id where user.id = 1;
+
+		assertNotNull(user);
+		assertNotNull(user.getEvents());
+		assertTrue(user.getEvents().size() > 0);
+		assertEquals("Why financial literacy matters", user.getEvents().get(0).getTitle());
+
 	}
 }

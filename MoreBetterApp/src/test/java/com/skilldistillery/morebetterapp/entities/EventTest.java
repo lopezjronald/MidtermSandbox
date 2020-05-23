@@ -60,5 +60,12 @@ class EventTest {
 		assertEquals("Finance", event.getCategory().getName());
 
 	}
-
+	@Test
+	@DisplayName("testing that event to user thru event_participant works")
+	void test3() {
+		assertNotNull(event);
+		assertNotNull(event.getUsers());
+		assertTrue(event.getUsers().size()>0);
+	
+	}
 }

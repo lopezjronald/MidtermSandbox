@@ -1,13 +1,18 @@
 package com.skilldistillery.morebetterapp.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -39,6 +44,13 @@ public class Event {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
+	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinTable(name = "event_participant",
+	joinColumns = @JoinColumn(name = "event_id"),
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List <User> users;
+	
+	
 	// constructors
 	public Event() {
 		super();
@@ -46,6 +58,29 @@ public class Event {
 
 	// methods
 
+	
+	 public void addUser(User user) {
+         if(users == null) {
+             users = new ArrayList<>();
+         }
+         if(! users.contains(user)) {
+             users.add(user);
+             user.addEvent(this);
+         }
+     }
+  
+   public void removeUser(User user) {
+          
+       if (users != null && users.contains(user)) {
+              users.remove(user);
+              user.removeEvent(this);
+          }
+          
+      }
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
@@ -131,6 +166,14 @@ public class Event {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

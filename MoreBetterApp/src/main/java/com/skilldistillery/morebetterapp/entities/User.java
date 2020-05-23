@@ -39,20 +39,40 @@ public class User {
 	private String picture;
 
 	private String biography;
-	
-	
-	//mapping
-	
-	
+
+	// mapping
+
 	@ManyToMany(mappedBy = "users")
-	private List <Category> categories;
+	private List<Category> categories;
 
 	@OneToMany(mappedBy = "user")
 	private List<Article> articles;
 
-    //methods
-	
-	
+	@ManyToMany(mappedBy = "users")
+	private List<Event> events;
+
+	// methods
+
+	public void addEvent(Event event) {
+		if (events == null) {
+			events = new ArrayList<>();
+		}
+		if (!events.contains(event)) {
+			events.add(event);
+			event.addUser(this);
+		}
+
+	}
+
+	public void removeEvent(Event event) {
+
+		if (events == null && events.contains(event)) {
+			events.remove(event);
+			event.removeUser(this);
+		}
+
+	}
+
 	public void addCategory(Category category) {
 		if (categories == null) {
 			categories = new ArrayList<>();
@@ -61,17 +81,16 @@ public class User {
 			categories.add(category);
 			category.addUser(this);
 		}
-		
+
 	}
-	
-	
-public void removeCategory(Category category) {
-		
+
+	public void removeCategory(Category category) {
+
 		if (categories == null && categories.contains(category)) {
 			categories.remove(category);
-			category.removeUser(this); 
+			category.removeUser(this);
 		}
-		
+
 	}
 
 	public List<Category> getCategories() {
@@ -81,7 +100,7 @@ public void removeCategory(Category category) {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
-	
+
 	public void addArticle(Article article) {
 		if (articles == null)
 			articles = new ArrayList<>();
@@ -95,7 +114,6 @@ public void removeCategory(Category category) {
 		}
 	}
 
-	
 	public void removeArticle(Article article) {
 		article.setUser(null);
 		if (articles != null) {
@@ -238,6 +256,14 @@ public void removeCategory(Category category) {
 		return id;
 	}
 
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -248,7 +274,5 @@ public void removeCategory(Category category) {
 				.append(biography).append("]");
 		return builder.toString();
 	}
-
-	
 
 }
