@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity(name = "article_comment")
 public class ArticleComment {
 
@@ -19,6 +21,7 @@ public class ArticleComment {
 	private String content;
 
 	@Column(name = "created_at")
+	@CreationTimestamp
 	private LocalDateTime createdAt;
 
 	public ArticleComment() {

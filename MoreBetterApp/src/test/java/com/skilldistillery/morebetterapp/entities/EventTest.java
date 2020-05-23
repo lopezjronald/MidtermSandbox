@@ -64,8 +64,15 @@ class EventTest {
 	@DisplayName("testing that event to user thru event_participant works")
 	void test3() {
 		assertNotNull(event);
-		assertNotNull(event.getUsers());
-		assertTrue(event.getUsers().size()>0);
+		assertNotNull(event.getAttendees());
+		assertTrue(event.getAttendees().size()>0); // changed user to attendees
 	
+	}
+	@Test
+	@DisplayName("testing that eventOwned to userOwner works")
+	void test4() {
+		assertNotNull(event);
+		assertNotNull(event.getEventMentor());
+		assertEquals("Joe",  event.getEventMentor().getFirstName());
 	}
 }

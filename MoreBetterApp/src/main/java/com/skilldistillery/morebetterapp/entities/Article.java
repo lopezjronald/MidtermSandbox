@@ -1,13 +1,20 @@
 package com.skilldistillery.morebetterapp.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Article {
@@ -18,31 +25,62 @@ public class Article {
 
 	private String title;
 	private String contents;
-	private LocalDateTime created;
-	
-	
-	//mapping
 
+	@CreationTimestamp
+	private LocalDateTime created;
+
+	// mapping
+
+	//
 	@ManyToOne
 	@JoinColumn(name = "mentor_id")
-	private User user;
-	
-	
-	
+	private User userAuthor;
+
 	@ManyToOne
-    @JoinColumn(name="category_id")
+	@JoinColumn(name = "category_id")
 	private Category category;
-	
-	
-	
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@JoinTable(name = "article_comment", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> userReaders;
 
 	// methods
-	
-	
 
 	public Article() {
 		super();
 	}
+
+	// begin mapping articles to userreaders
+
+	public void addUserReader(User user) {
+		if (userReaders == null) {
+			userReaders = new ArrayList<>();
+		}
+		if (!userReaders.contains(user)) {
+			userReaders.add(user);
+			user.addReadArticle(this);
+		}
+	}
+
+	public void removeUserReader(User user) {
+
+		if (userReaders != null && userReaders.contains(user)) {
+			userReaders.remove(user);
+			user.removeReadArticle(this);
+		}
+
+	}
+
+	public List<User> getUserReaders() {
+		return userReaders;
+	}
+
+	public void setUserReaders(List<User> userReaders) {
+		this.userReaders = userReaders;
+
+	}
+
+	// end mapping article to userreaders
 
 	public Category getCategory() {
 		return category;
@@ -74,12 +112,12 @@ public class Article {
 		return true;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserAuthor() {
+		return userAuthor;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserAuthor(User user) {
+		this.userAuthor = user;
 	}
 
 	public int getId() {

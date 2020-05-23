@@ -15,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Event {
 
@@ -35,22 +38,25 @@ public class Event {
 	private Double price;
 
 	@Column(name = "created_at")
+	@CreationTimestamp
 	private LocalDateTime created;
 
 	@Column(name = "last_updated")
+	@UpdateTimestamp
 	private LocalDateTime updated;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinTable(name = "event_participant",
-	joinColumns = @JoinColumn(name = "event_id"),
-	inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List <User> users;
-	
-	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@JoinTable(name = "event_participant", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> attendees;
+
+	@ManyToOne
+	@JoinColumn(name = "mentor_id")
+	private User eventMentor;
+
 	// constructors
 	public Event() {
 		super();
@@ -58,29 +64,41 @@ public class Event {
 
 	// methods
 
-	
-	 public void addUser(User user) {
-         if(users == null) {
-             users = new ArrayList<>();
-         }
-         if(! users.contains(user)) {
-             users.add(user);
-             user.addEvent(this);
-         }
-     }
-  
-   public void removeUser(User user) {
-          
-       if (users != null && users.contains(user)) {
-              users.remove(user);
-              user.removeEvent(this);
-          }
-          
-      }
-	
-	
-	
-	
+	public void addAttendee(User attendee) {
+		if (attendees == null) {
+			attendees = new ArrayList<>();
+		}
+		if (!attendees.contains(attendee)) {
+			attendees.add(attendee);
+			attendee.addEventAttended(this);
+		}
+	}
+
+	public void removeAttendee(User attendee) {
+
+		if (attendees != null && attendees.contains(attendee)) {
+			attendees.remove(attendee);
+			attendee.removeEventAttended(this);
+		}
+
+	}
+
+	public List<User> getAttendees() {
+		return attendees;
+	}
+
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
+	}
+
+	public User getEventMentor() {
+		return eventMentor;
+	}
+
+	public void setEventMentor(User eventMentor) {
+		this.eventMentor = eventMentor;
+	}
+
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
@@ -166,14 +184,6 @@ public class Event {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 }
