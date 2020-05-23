@@ -10,17 +10,17 @@ import com.skilldistillery.morebetterapp.data.EventDAO;
 import com.skilldistillery.morebetterapp.data.UserDAO;
 
 @Controller
-public class HomeController {
-
+public class UserController {
+	
 	@Autowired
 	private ArticleDAO articleDao;
 	private CategoryDAO categoryDao;
 	private EventDAO eventDao;
 	private UserDAO userDao;
 	
-	@RequestMapping(path= {"/", "home.do"})
-	public String home() {
-		return "index";
-	}
-	
+//	@RequestMapping(path= )
+//	public String userPage() {
+//		return "";
+//	}
+
 }
