@@ -36,11 +36,9 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public boolean deleteEventById(int id) { // only a mentor can delete an event
-		Event event = null;
-		String jpql = "SELECT e FROM Event e WHERE e.id = :id";
-		event = em.createQuery(jpql, Event.class).setParameter("id", id).getSingleResult();
-		em.remove(event);
-		boolean stillContains = !em.contains(event);
+		Event eventToDelete = em.find(Event.class, id);
+		em.remove(eventToDelete);
+		boolean stillContains = !em.contains(eventToDelete);
 		em.flush();
 		return stillContains; // returns True if event was deleted successfully
 	}

@@ -28,11 +28,9 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean deleteUserById(int id) {
-		User user = null;
-		String jpql = "SELECT u FROM User u WHERE u.id = :id";
-		user = em.createQuery(jpql, User.class).setParameter("id", id).getSingleResult();
-		em.remove(user);
-		boolean stillContains = !em.contains(user);
+		User userToDelete = em.find(User.class, id);
+		em.remove(userToDelete);
+		boolean stillContains = !em.contains(userToDelete);
 		em.flush();
 		return stillContains; // should return TRUE if deleted successfully.
 	}

@@ -34,11 +34,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public boolean deleteArticleById(int id) {
-		Article article = null;
-		String jpql = "SELECT a FROM Article a WHERE a.id = :id";
-		article = em.createQuery(jpql, Article.class).setParameter("id", id).getSingleResult();
-		em.remove(article);
-		boolean stillContains = !em.contains(article);
+		Article articleToDelete = em.find(Article.class, id);
+		em.remove(articleToDelete);
+		boolean stillContains = !em.contains(articleToDelete);
 		em.flush();
 		return stillContains; // returns TRUE if deleted successfully
 	}
