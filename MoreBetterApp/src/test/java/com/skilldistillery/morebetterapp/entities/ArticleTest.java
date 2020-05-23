@@ -55,5 +55,12 @@ class ArticleTest {
 		assertEquals(10, article.getCreated().getDayOfMonth());
 
 	}
+	
+	@Test //select user.first_name from user join article on article.mentor_id = user.id where article.id =1;
+	@DisplayName("testing that article to user mapping work")
+	void test2() {
+		assertNotNull(article);
+		assertEquals("Joe", article.getUser().getFirstName());
+	}
 
 }

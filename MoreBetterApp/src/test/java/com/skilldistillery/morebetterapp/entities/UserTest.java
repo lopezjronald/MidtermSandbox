@@ -59,5 +59,15 @@ class UserTest {
 		assertEquals(null, user.getBiography());
 		
 	}
+	
+	
+	@Test //select article.title from article join user on article.mentor_id = user.id where user.id =1;
+	@DisplayName("testing that user to article mapping work")
+	void test2() {
 
+		assertNotNull(user);
+		assertNotNull(user.getArticles());
+		assertTrue(user.getArticles().size()>0);
+		assertEquals("Do you have a long-term plan ", user.getArticles().get(0).getTitle());
+	}
 }
