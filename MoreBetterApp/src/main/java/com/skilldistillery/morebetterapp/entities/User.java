@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -38,12 +39,49 @@ public class User {
 	private String picture;
 
 	private String biography;
+	
+	
+	//mapping
+	
+	
+	@ManyToMany(mappedBy = "users")
+	private List <Category> categories;
 
 	@OneToMany(mappedBy = "user")
 	private List<Article> articles;
 
-//methods
+    //methods
+	
+	
+	public void addCategory(Category category) {
+		if (categories == null) {
+			categories = new ArrayList<>();
+		}
+		if (!categories.contains(category)) {
+			categories.add(category);
+			category.addUser(this);
+		}
+		
+	}
+	
+	
+public void removeCategory(Category category) {
+		
+		if (categories == null && categories.contains(category)) {
+			categories.remove(category);
+			category.removeUser(this); 
+		}
+		
+	}
 
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	
 	public void addArticle(Article article) {
 		if (articles == null)
 			articles = new ArrayList<>();
@@ -57,6 +95,7 @@ public class User {
 		}
 	}
 
+	
 	public void removeArticle(Article article) {
 		article.setUser(null);
 		if (articles != null) {
@@ -209,5 +248,7 @@ public class User {
 				.append(biography).append("]");
 		return builder.toString();
 	}
+
+	
 
 }

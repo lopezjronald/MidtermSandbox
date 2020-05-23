@@ -45,7 +45,7 @@ class ArticleTest {
 	}
 
 	@Test
-	@DisplayName("testing that address mapping work")
+	@DisplayName("testing that article mapping work")
 	void test1() {
 		assertNotNull(article);
 		assertEquals("Do you have a long-term plan ", article.getTitle());
@@ -61,6 +61,13 @@ class ArticleTest {
 	void test2() {
 		assertNotNull(article);
 		assertEquals("Joe", article.getUser().getFirstName());
+	}
+	
+	@Test
+	@DisplayName("testing that article to category mapping work")
+	void test3() {
+		assertNotNull(article);
+		assertEquals("Finance", article.getCategory().getName());
 	}
 
 }

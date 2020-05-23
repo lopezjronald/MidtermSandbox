@@ -19,15 +19,37 @@ public class Article {
 	private String title;
 	private String contents;
 	private LocalDateTime created;
+	
+	
+	//mapping
 
 	@ManyToOne
 	@JoinColumn(name = "mentor_id")
 	private User user;
+	
+	
+	
+	@ManyToOne
+    @JoinColumn(name="category_id")
+	private Category category;
+	
+	
+	
 
 	// methods
+	
+	
 
 	public Article() {
 		super();
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
