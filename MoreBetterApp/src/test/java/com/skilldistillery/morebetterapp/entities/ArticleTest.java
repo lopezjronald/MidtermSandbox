@@ -2,6 +2,7 @@ package com.skilldistillery.morebetterapp.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,25 +50,37 @@ class ArticleTest {
 	void test1() {
 		assertNotNull(article);
 		assertEquals("Do you have a long-term plan ", article.getTitle());
-		assertEquals("Despite the recent recovery in the market, stocks remain down by more than 12% from the February peak, and about 9% year-to-date. Meanwhile, the story for the first three weeks of May has been one of running in place.", article.getContents());
+		assertEquals(
+				"Despite the recent recovery in the market, stocks remain down by more than 12% from the February peak, and about 9% year-to-date. Meanwhile, the story for the first three weeks of May has been one of running in place.",
+				article.getContents());
 		assertEquals(2020, article.getCreated().getYear());
 		assertEquals(4, article.getCreated().getMonthValue());
 		assertEquals(10, article.getCreated().getDayOfMonth());
 
 	}
-	
-	@Test //select user.first_name from user join article on article.mentor_id = user.id where article.id =1;
-	@DisplayName("testing that article to user mapping work")
+
+	@Test // select user.first_name from user join article on article.mentor_id = user.id
+			// where article.id =1;
+	@DisplayName("testing that article to userAuthor mapping work")
 	void test2() {
 		assertNotNull(article);
-		assertEquals("Joe", article.getUser().getFirstName());
+		assertEquals("Joe", article.getUserAuthor().getFirstName());
 	}
-	
+
 	@Test
 	@DisplayName("testing that article to category mapping work")
 	void test3() {
 		assertNotNull(article);
 		assertEquals("Finance", article.getCategory().getName());
+	}
+
+	@Test
+	@DisplayName("testing that readArticle to userReader thru article_comment works")
+	void test4() {
+		assertNotNull(article);
+		assertNotNull(article.getUserReaders());
+		assertTrue(article.getUserReaders().size() > 0);
+
 	}
 
 }

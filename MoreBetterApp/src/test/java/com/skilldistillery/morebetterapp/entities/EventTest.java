@@ -49,6 +49,7 @@ class EventTest {
 		assertNotNull(event);
 		assertEquals("Why financial literacy matters", event.getTitle());
 		assertEquals("Financial literacy cannot predict or remedy a crisis, but financial education will play a pivotal role in the economic recovery of our country.", event.getDescription());
+
 	}
 	
 	// SELECT category.name FROM category JOIN event ON category.id = event.category_id WHERE event.id = 1;
@@ -57,6 +58,21 @@ class EventTest {
 	void test2() {
 		assertNotNull(event);
 		assertEquals("Finance", event.getCategory().getName());
-	}
 
+	}
+	@Test
+	@DisplayName("testing that event to user thru event_participant works")
+	void test3() {
+		assertNotNull(event);
+		assertNotNull(event.getAttendees());
+		assertTrue(event.getAttendees().size()>0); // changed user to attendees
+	
+	}
+	@Test
+	@DisplayName("testing that eventOwned to userOwner works")
+	void test4() {
+		assertNotNull(event);
+		assertNotNull(event.getEventMentor());
+		assertEquals("Joe",  event.getEventMentor().getFirstName());
+	}
 }

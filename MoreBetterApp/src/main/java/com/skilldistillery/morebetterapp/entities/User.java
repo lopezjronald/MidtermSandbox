@@ -39,20 +39,124 @@ public class User {
 	private String picture;
 
 	private String biography;
-	
-	
-	//mapping
-	
-	
-	@ManyToMany(mappedBy = "users")
-	private List <Category> categories;
 
-	@OneToMany(mappedBy = "user")
-	private List<Article> articles;
+	// mapping
 
-    //methods
-	
-	
+	@ManyToMany(mappedBy = "users") // check on this
+	private List<Category> categories;
+
+	@OneToMany(mappedBy = "userAuthor")
+	private List<Article> writtenArticles;
+
+	@ManyToMany(mappedBy = "attendees")
+	private List<Event> eventsAttended;
+
+	@OneToMany(mappedBy = "eventMentor")
+	private List<Event> eventsOwned;
+
+	@ManyToMany(mappedBy = "userReaders")
+	private List<Article> readArticles;
+
+	// methods
+
+	// begin add/remove ReadArticles
+
+	public List<Article> getReadArticles() {
+		return readArticles;
+	}
+
+	public void setReadArticles(List<Article> readArticles) {
+		this.readArticles = readArticles;
+	}
+
+	public void addReadArticle(Article article) {
+		if (readArticles == null) {
+			readArticles = new ArrayList<>();
+		}
+		if (!readArticles.contains(article)) {
+			readArticles.add(article);
+			article.addUserReader(this);
+		}
+
+	}
+
+	public void removeReadArticle(Article article) {
+
+		if (readArticles == null && readArticles.contains(article)) {
+			readArticles.remove(article);
+			article.removeUserReader(this);
+		}
+
+	}
+
+	// end add/remove ReadArticles
+
+//begin add/remove eventsOwned
+	public void addEventOwned(Event eventOwned) {
+		if (eventsOwned == null)
+			eventsOwned = new ArrayList<>();
+
+		if (!eventsOwned.contains(eventOwned)) {
+			eventsOwned.add(eventOwned);
+			if (eventOwned.getEventMentor() != null) {
+				eventOwned.getEventMentor().getEventsOwned().remove(eventOwned);
+			}
+			eventOwned.setEventMentor(this);
+		}
+	}
+
+	public void removeEventOwned(Event eventOwned) {
+		eventOwned.setEventMentor(null);
+		if (eventsOwned != null) {
+			eventsOwned.remove(eventOwned);
+		}
+	}
+
+//end add/remove eventsOwned
+
+	// begin add/remove EventsAttended ---------------------------
+	public void addEventAttended(Event event) {
+		if (eventsAttended == null) {
+			eventsAttended = new ArrayList<>();
+		}
+		if (!eventsAttended.contains(event)) {
+			eventsAttended.add(event);
+			event.addAttendee(this);
+		}
+
+	}
+
+	public void removeEventAttended(Event event) {
+
+		if (eventsAttended == null && eventsAttended.contains(event)) {
+			eventsAttended.remove(event);
+			event.removeAttendee(this);
+		}
+
+	}
+
+	public List<Event> getEventsAttended() {
+		return eventsAttended;
+	}
+
+	public void setEventsAttended(List<Event> eventsAttended) {
+		this.eventsAttended = eventsAttended;
+	}
+//end add/remove EventsAttended ---------------------------
+
+//begin add remove eventsOwned-----------------------
+
+	public List<Event> getEventsOwned() {
+		return eventsOwned;
+	}
+
+	public void setEventsOwned(List<Event> eventsOwned) {
+		this.eventsOwned = eventsOwned;
+	}
+
+//end events owned ----------------------------------
+
+//begin add/remove category----------------------------------
 	public void addCategory(Category category) {
 		if (categories == null) {
 			categories = new ArrayList<>();
@@ -61,17 +165,16 @@ public class User {
 			categories.add(category);
 			category.addUser(this);
 		}
-		
+
 	}
-	
-	
-public void removeCategory(Category category) {
-		
+
+	public void removeCategory(Category category) {
+
 		if (categories == null && categories.contains(category)) {
 			categories.remove(category);
-			category.removeUser(this); 
+			category.removeUser(this);
 		}
-		
+
 	}
 
 	public List<Category> getCategories() {
@@ -81,77 +184,39 @@ public void removeCategory(Category category) {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
-	
+// end add/remove category----------------------------------
+
+// begin add/remove  Article	----------------------------------
 	public void addArticle(Article article) {
-		if (articles == null)
-			articles = new ArrayList<>();
+		if (writtenArticles == null)
+			writtenArticles = new ArrayList<>();
 
-		if (!articles.contains(article)) {
-			articles.add(article);
-			if (article.getUser() != null) {
-				article.getUser().getArticles().remove(article);
+		if (!writtenArticles.contains(article)) {
+			writtenArticles.add(article);
+			if (article.getUserAuthor() != null) {
+				article.getUserAuthor().getWrittenArticles().remove(article);
 			}
-			article.setUser(this);
+			article.setUserAuthor(this);
 		}
 	}
 
-	
 	public void removeArticle(Article article) {
-		article.setUser(null);
-		if (articles != null) {
-			articles.remove(article);
+		article.setUserAuthor(null);
+		if (writtenArticles != null) {
+			writtenArticles.remove(article);
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
+	public List<Article> getWrittenArticles() {
+		return writtenArticles;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public void setWrittenArticles(List<Article> articles) {
+		this.writtenArticles = articles;
 	}
+// end  add/remove  Article	----------------------------------
 
 	public User() {
-	}
-
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public User(String firstName, String lastName, String email, String role, Integer age, String username,
-			String password, Integer enabled, String picture, String biography) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.role = role;
-		this.age = age;
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-		this.picture = picture;
-		this.biography = biography;
 	}
 
 	public String getFirstName() {
@@ -238,6 +303,24 @@ public void removeCategory(Category category) {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User(String firstName, String lastName, String email, String role, Integer age, String username,
+			String password, Integer enabled, String picture, String biography) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.role = role;
+		this.age = age;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.picture = picture;
+		this.biography = biography;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -249,6 +332,26 @@ public void removeCategory(Category category) {
 		return builder.toString();
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
 }
