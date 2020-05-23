@@ -4,8 +4,8 @@ import com.skilldistillery.morebetterapp.entities.Event;
 
 public interface EventDAO {
 	public Event findById(int id);
-	public Event findByTitle(String title);
+	public Event findEventByTitle(String title);
 	public Event createEvent(Event event);
-	public boolean deleteEvent(String name);
+	public boolean deleteEventById(int id);
 	public Event updateEvent(int id, Event event);
 }

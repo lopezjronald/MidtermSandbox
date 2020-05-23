@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean deleteUser(String name) {
+	public boolean deleteUserById(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

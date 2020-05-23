@@ -6,40 +6,41 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.morebetterapp.entities.Event;
+import com.skilldistillery.morebetterapp.entities.Article;
 
 @Service
 @Transactional
-public class EventDAOImpl implements EventDAO {
+public class ArticleDAOImpl implements ArticleDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
+	
 	@Override
-	public Event findById(int id) {
+	public Article findArticleById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Event findEventByTitle(String title) {
+	public Article findArticleByTitle(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Event createEvent(Event event) {
+	public Article createArticle(Article article) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteEventById(int id) {
+	public boolean deleteArticleById(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Event updateEvent(int id, Event event) {
+	public Article updateArticle(int id, Article article) {
 		// TODO Auto-generated method stub
 		return null;
 	}
