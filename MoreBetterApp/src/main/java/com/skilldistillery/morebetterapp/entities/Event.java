@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Event {
@@ -14,36 +16,35 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String title;
 	private String description;
 	private String location;
-	
-	@Column(name="event_date")
+
+	@Column(name = "event_date")
 	private String eventDate;
-	
-	@Column(name="max_capacity")
+
+	@Column(name = "max_capacity")
 	private Integer maxCapacity;
-	
+
 	private Double price;
-	
-	@Column(name="created_at")
+
+	@Column(name = "created_at")
 	private LocalDateTime created;
-	
-	@Column(name="last_updated")
+
+	@Column(name = "last_updated")
 	private LocalDateTime updated;
 
-	
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+
 	// constructors
 	public Event() {
 		super();
 	}
-	
-	
+
 	// methods
-	
 
 	@Override
 	public String toString() {
@@ -51,7 +52,6 @@ public class Event {
 				+ ", eventDate=" + eventDate + ", maxCapacity=" + maxCapacity + ", price=" + price + ", created="
 				+ created + ", updated=" + updated + "]";
 	}
-
 
 	public int getId() {
 		return id;
@@ -124,6 +124,13 @@ public class Event {
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
 	}
-	
-	
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 }

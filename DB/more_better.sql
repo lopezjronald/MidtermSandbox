@@ -281,6 +281,16 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `mentor_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `morebetterdb`;
+INSERT INTO `mentor_category` (`user_id`, `category_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `article_comment`
 -- -----------------------------------------------------
 START TRANSACTION;

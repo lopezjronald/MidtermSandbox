@@ -55,5 +55,30 @@ class CategoryTest {
 	}
 
 	
+
+	@Test    // SELECT event.title FROM category JOIN event ON category.id = event.category_id WHERE category.id = 1;
+	@DisplayName("testing that category to event works")
+	void test2() {
+		assertNotNull(category);
+		assertEquals("Why financial literacy matters", category.getEvents().get(0).getTitle()); 
+		
+	}
+	
+	@Test   //select article.title from article join category on category.id = article.category_id where category.id =1;
+	@DisplayName("testing that category to article works")
+	void test3() {
+		assertNotNull(category);
+		assertEquals("Do you have a long-term plan ", category.getArticles().get(0).getTitle()); 
+		
+	}
+	
+	@DisplayName("testing that category to user works")
+	void test4() {
+		assertNotNull(category);
+		assertNotNull(category.getUsers());
+		assertTrue(category.getUsers().size()>0);
+		
+	}
+	
 	
 }
