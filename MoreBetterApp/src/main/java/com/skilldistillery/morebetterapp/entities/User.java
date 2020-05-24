@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +27,9 @@ public class User {
 	private String lastName;
 
 	private String email;
-
-	private String role;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	private Integer age;
 
@@ -243,11 +246,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
@@ -307,7 +310,7 @@ public class User {
 		this.id = id;
 	}
 
-	public User(String firstName, String lastName, String email, String role, Integer age, String username,
+	public User(String firstName, String lastName, String email, Role role, Integer age, String username,
 			String password, Integer enabled, String picture, String biography) {
 		this.firstName = firstName;
 		this.lastName = lastName;
