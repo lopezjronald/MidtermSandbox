@@ -7,16 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-MoreBetter
-
-"MORE(Ways To) BETTER (Your Life)"
-
-logo
-
-3 links routing to each specific category Article Page
-
-
-
-
+Hello
 </body>
 </html>

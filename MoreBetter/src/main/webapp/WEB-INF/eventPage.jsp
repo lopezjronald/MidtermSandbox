@@ -7,16 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-MoreBetter
+Category Event Page
 
-"MORE(Ways To) BETTER (Your Life)"
-
-logo
-
-3 links routing to each specific category Article Page
-
-
-
-
+when the button on  article page is clicked, it takes you to this page where all events are displayed
 </body>
 </html>
