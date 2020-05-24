@@ -1,1 +1,111 @@
-@charset "UTF-8";
+/************* TAG SELECT0R *******************/
+
+body {
+	margin: 0;
+	background-color: #d4f3ef;
+}
+
+div {
+	
+}
+
+
+h1 {
+	font-family: "proxima_nova_regular", "Helvetica", san-serif;
+	margin-top: 0;
+}
+
+h3 {
+	text-align:center;
+	color: #00263b;
+}
+
+img:hover {
+	
+	border-radius: 100%;
+	background-color: #f4ea8e;
+
+}
+
+/*************** CLASS SELECT0R *******************/
+/************* CLASS ON MULTIPLES *****************/
+
+.mind:hover {
+	width: 35%;
+	hight: 35%;				
+}
+
+.finance:hover {
+	width: 35%;
+	hight: 35%;	
+}
+
+.heart:hover {
+	width: 35%;
+	hight: 35%;			
+}
+
+.mind {
+	float: left;
+  	width: 25%;
+  	padding: 10px;
+}
+
+.finance {
+	float: left;
+  	width: 25%;
+  	padding: 10px;
+}
+
+.heart {
+	float: left;
+  	width: 25%;
+  	padding: 10px;
+}
+
+
+/* Clear floats after image containers */
+.row {
+	display: table;
+  	margin-right: auto;
+  	margin-left: auto;
+}
+
+.submit-button {
+	color: #111;
+	primary: #FFAB9D;
+	text-align: center;
+}
+
+/******************* ID SELECT0R **********************/
+/***************** ID FOR UNIQUE STYLE ****************/
+
+#heading {
+	color: #00263b;
+	font-size: 50px;
+	font-style: italic;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
