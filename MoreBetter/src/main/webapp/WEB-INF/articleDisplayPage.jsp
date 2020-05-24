@@ -7,16 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-MoreBetter
+category Article display
 
-"MORE(Ways To) BETTER (Your Life)"
-
-logo
-
-3 links routing to each specific category Article Page
-
-
-
-
+<-- when an article is clicked on, it displays the full article with all article information here-->
 </body>
 </html>
